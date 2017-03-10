@@ -3,7 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var AppContainer = require('../scripts/components/login.jsx').AppContainer;
-var Messages = require('../scripts/components/messages.jsx').Messages;
+var MessagesContainer = require('../scripts/components/messages.jsx').MessagesContainer;
 
 var AppRouter = Backbone.Router.extend({
   routes: {
@@ -13,14 +13,14 @@ var AppRouter = Backbone.Router.extend({
 
   index(){
     ReactDOM.render(
-      React.createElement(AppContainer),
+      React.createElement(AppContainer, {router: this}),
       document.getElementById('app')
     )
   },
 
   messages(){
     ReactDOM.render(
-      React.createElement(Messages),
+      React.createElement(MessagesContainer),
       document.getElementById('app')
     )
   }
