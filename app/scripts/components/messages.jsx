@@ -8,19 +8,33 @@ class MessagesContainer extends React.Component{
     super(props);
     var self = this;
     this.state = {
-      messages: new models.MessageCollection()
+      messages: new models.MessageCollection(),
+      message: ''
     }
-
-    this.state.messages.fetch().done(function(data){
-      console.log('data', data);
-      self.setState({messages: data});
-    })
-
     this.handleSendMessage = this.handleSendMessage.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
+  }
 
+  componentWillMount() {
+    var self = this;
+    this.state.messages.fetch().then(function(data){
+      self.state.messages.add(data.results)
+      self.forceUpdate();
+    });
   }
   handleSendMessage(e){
-    e.preventDefault;
+    e.preventDefault();
+    this.state.messages.create({
+      message: this.state.message,
+      user: JSON.parse(localStorage.getItem('user')).username
+    });
+    // set a reset on form enter and local storage to the user id
+    this.setState({message: ''});
+    this.forceUpdate();
+  }
+
+  handleMessage(e){
+    this.setState({message: e.target.value})
   }
 
   render(){
@@ -31,10 +45,10 @@ class MessagesContainer extends React.Component{
         <form onSubmit={this.handleSendMessage} id="message">
           <div className="form-group">
             { this.state.messages.length != 0 ? <Messages messages={this.state.messages} /> : null }
-            <input className="form-control" name="message" id="user-message" type="message" placeholder="Message" />
+            <input value={this.state.message.message} onChange={this.handleMessage} className="form-control" name="message" id="user-message" type="message" placeholder="Message" />
           </div>
 
-          <input className="btn btn-danger form-control" type="submit" value="Say Something" />
+          <input className="btn btn-primary form-control" type="submit" value="Say Something" />
         </form>
       </div>
     )
@@ -46,19 +60,19 @@ class MessagesContainer extends React.Component{
 class Messages extends React.Component {
 
   render(){
-
+    // var messages = this.props.messages;
     let { messages } = this.props;
 
-    messages = this.props.messages.results.map(function(message, index){
-      console.log(message);
+    messages = this.props.messages.map(function(message, index){
+      // console.log(message);
       return (
-        <li key={message.cid}>{message.message}</li>
+        <li key={message.cid}>{message.get('message')}</li>
       )
     });
 
     return (
       <div className="chatwindow">
-        <h5>Messages</h5>
+        <h4>Messages</h4>
           <ul>
             {messages}
           </ul>
