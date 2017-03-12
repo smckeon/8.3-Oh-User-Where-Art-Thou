@@ -7,7 +7,6 @@ var Message = Backbone.Model.extend({
 
 var MessageCollection = Backbone.Collection.extend({
   model: Message,
-  
   url: 'https://tiny-parse-server.herokuapp.com/classes/Message'
 });
 

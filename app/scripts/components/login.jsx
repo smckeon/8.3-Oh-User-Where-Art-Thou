@@ -5,7 +5,7 @@ var Messages = require('../components/messages.jsx').Messages;
 var BaseLayout = require('./layouts/base.jsx').BaseLayout;
 
 
-var apiUrl = 'https://tiny-lasagna-server.herokuapp.com';
+var apiUrl = 'https://tiny-parse-server.herokuapp.com';
 
 
 class AppContainer extends React.Component {

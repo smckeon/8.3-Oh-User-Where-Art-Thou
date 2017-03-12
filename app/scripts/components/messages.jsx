@@ -53,7 +53,6 @@ class MessagesContainer extends React.Component{
       </div>
     )
   }
-
 };
 
 
