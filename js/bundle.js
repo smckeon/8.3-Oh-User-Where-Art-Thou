@@ -25,7 +25,7 @@ var Messages = require('../components/messages.jsx').Messages;
 var BaseLayout = require('./layouts/base.jsx').BaseLayout;
 
 
-var apiUrl = 'https://tiny-lasagna-server.herokuapp.com';
+var apiUrl = 'https://tiny-parse-server.herokuapp.com';
 
 
 class AppContainer extends React.Component {
@@ -190,7 +190,6 @@ class MessagesContainer extends React.Component{
       )
     )
   }
-
 };
 
 
@@ -246,7 +245,6 @@ var Message = Backbone.Model.extend({
 
 var MessageCollection = Backbone.Collection.extend({
   model: Message,
-  
   url: 'https://tiny-parse-server.herokuapp.com/classes/Message'
 });
 
