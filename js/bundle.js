@@ -19,6 +19,7 @@ module.exports = {
 },{"react":167}],2:[function(require,module,exports){
 "use strict";
 var $ = require('jquery');
+var Backbone = require('backbone');
 var React = require('react');
 
 var Messages = require('../components/messages.jsx').Messages;
@@ -38,7 +39,8 @@ class AppContainer extends React.Component {
       password: $('#signup-password').val()
     }
     $.post(apiUrl + '/users', user).then(function(data){
-   console.log(data);
+      console.log(data);
+      Backbone.history.navigate('#messages', {trigger: true})
     });
   }
 
@@ -57,7 +59,7 @@ class AppContainer extends React.Component {
 
     $.get(url).then(function(data){
       localStorage.setItem('userToken', data.sessionToken);
-      self.props.router.navigate('#messages', {trigger: true});
+      Backbone.history.navigate('#messages', {trigger: true});
     });
   }
 
@@ -133,7 +135,7 @@ module.exports = {
   AppContainer
 }
 
-},{"../components/messages.jsx":3,"./layouts/base.jsx":1,"jquery":36,"react":167}],3:[function(require,module,exports){
+},{"../components/messages.jsx":3,"./layouts/base.jsx":1,"backbone":8,"jquery":36,"react":167}],3:[function(require,module,exports){
 "use strict";
 var React = require('react');
 // var BaseLayout = require('./layouts/base.jsx');
@@ -163,7 +165,7 @@ class MessagesContainer extends React.Component{
     e.preventDefault();
     this.state.messages.create({
       message: this.state.message,
-      user: JSON.parse(localStorage.getItem('user')).username
+      user: JSON.parse(localStorage.getItem('user'))
     });
     // set a reset on form enter and local storage to the user id
     this.setState({message: ''});
