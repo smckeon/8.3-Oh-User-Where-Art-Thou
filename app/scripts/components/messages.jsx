@@ -26,7 +26,7 @@ class MessagesContainer extends React.Component{
     e.preventDefault();
     this.state.messages.create({
       message: this.state.message,
-      user: JSON.parse(localStorage.getItem('user')).username
+      user: JSON.parse(localStorage.getItem('user'))
     });
     // set a reset on form enter and local storage to the user id
     this.setState({message: ''});

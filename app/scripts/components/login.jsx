@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var Backbone = require('backbone');
 var React = require('react');
 
 var Messages = require('../components/messages.jsx').Messages;
@@ -18,7 +19,8 @@ class AppContainer extends React.Component {
       password: $('#signup-password').val()
     }
     $.post(apiUrl + '/users', user).then(function(data){
-   console.log(data);
+      console.log(data);
+      Backbone.history.navigate('#messages', {trigger: true})
     });
   }
 
@@ -37,7 +39,7 @@ class AppContainer extends React.Component {
 
     $.get(url).then(function(data){
       localStorage.setItem('userToken', data.sessionToken);
-      self.props.router.navigate('#messages', {trigger: true});
+      Backbone.history.navigate('#messages', {trigger: true});
     });
   }
 
@@ -48,7 +50,7 @@ class AppContainer extends React.Component {
         <div className="container">
           <div className="row">
            <div className="col-md-12">
-              <div className="col-md-6">
+            <div className="col-md-6">
 
                  <h2>Please Login</h2>
 
