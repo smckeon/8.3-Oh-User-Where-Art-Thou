@@ -68,7 +68,7 @@ class AppContainer extends React.Component {
         React.createElement("div", {className: "container"}, 
           React.createElement("div", {className: "row"}, 
            React.createElement("div", {className: "col-md-12"}, 
-              React.createElement("div", {className: "col-md-6"}, 
+            React.createElement("div", {className: "col-md-6"}, 
 
                  React.createElement("h2", null, "Please Login"), 
 
